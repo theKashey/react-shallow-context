@@ -49,6 +49,7 @@
   "devDependencies": {
     "codecov": "^3.0.3",
     "size-limit": "^0.20.1",
+    "react": "^16.3.0",
     "ts-react-toolbox": "^0.1.21"
   }
 }
