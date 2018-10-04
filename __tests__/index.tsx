@@ -22,6 +22,29 @@ describe('Specs', () => {
     }
   );
 
+  it('base behavior', () => {
+    const context = React.createContext({a: 1, b: 2});
+    const Top = generateProvider(context.Provider);
+    const spy = jest.fn();
+    const Reactor = () => (
+      <context.Consumer>{value => {
+        spy(value);
+        return null;
+      }}</context.Consumer>
+    );
+    const wrapper = mount(<Top value={{a: 1, b: 2}}><Blocker><Reactor/></Blocker></Top>);
+    expect(spy).toHaveBeenCalledWith({a: 1, b: 2});
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    wrapper.setProps({value: {a: 1, b: 2}});
+    expect(spy).toHaveBeenCalledWith({a: 1, b: 2});
+    expect(spy).toHaveBeenCalledTimes(2);
+
+    wrapper.setProps({value: {a: 1, b: 3}});
+    expect(spy).toHaveBeenCalledWith({a: 1, b: 3});
+    expect(spy).toHaveBeenCalledTimes(3);
+  });
+
   it('createPureContext', () => {
     const context = createPureContext({a: 1, b: 2});
     const Top = generateProvider(context.Provider);
