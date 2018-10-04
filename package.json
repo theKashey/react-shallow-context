@@ -1,0 +1,54 @@
+{
+  "name": "react-shallow-context",
+  "version": "1.0.0",
+  "description": "A speed optimization for a Context API",
+  "main": "dist/es5/index.js",
+  "scripts": {
+    "test": "ts-react-toolbox test",
+    "bootstrap": "ts-react-toolbox init",
+    "dev": "ts-react-toolbox dev",
+    "test:ci": "ts-react-toolbox test --runInBand --coverage",
+    "test:size": "size-limit",
+    "build": "ts-react-toolbox build",
+    "prepublishOnly": "yarn build",
+    "release": "ts-react-toolbox release",
+    "lint": "ts-react-toolbox lint",
+    "static": "ts-react-toolbox publish",
+    "format": "ts-react-toolbox format",
+    "analyze": "ts-react-toolbox analyze"
+  },
+  "repository": "git+https://github.com/theKashey/react-shallow-context.git",
+  "bugs": {
+    "url": "https://github.com/theKashey/react-shallow-context/issues"
+  },
+  "homepage": "https://github.com/theKashey/react-shallow-context#readme",
+  "author": "Anton Korzunov (thekashey@gmail.com)",
+  "license": "MIT",
+  "dependencies": {
+    "shallow-equal": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=8.5.0"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0"
+  },
+  "sideEffects": false,
+  "jsnext:main": "dist/es2015/index.js",
+  "module": "dist/es2015/index.js",
+  "types": "dist/es5/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "context",
+    "observedBits",
+    "speed"
+  ],
+  "devDependencies": {
+    "codecov": "^3.0.3",
+    "size-limit": "^0.20.1",
+    "ts-react-toolbox": "^0.1.21"
+  }
+}
