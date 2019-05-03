@@ -36,6 +36,13 @@ This package provides a way to handle the value change event, and suppress unnec
 
 ## createPureContext(defaultValue)
 Creates "pure" context, the same "pure" as in "PureComponent". This is basically `React.createContext(xx, pureContextCompare)`
+```js
+👎 import {createContext} from 'react';
+const context = createContext();
+
+👍 import {createPureContext} from 'react-shallow-context';
+const context = createPureContext();
+```
 
 ## pureContextCompare
 shallow compares the old and the next context value. Supress update if the are the same.
@@ -61,8 +68,6 @@ The same, but with inversed logic.
 import {updateOnlyFor} from 'react-shallow-context';
 const context = React.createContext({importantValue, notImportantValue}, updateOnlyFor(['importantValue']));
 ```
-
-# Written in TypeScript
 
 # Licence
  MIT
