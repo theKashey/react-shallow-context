@@ -20,22 +20,22 @@
 </div>  
 
 # Goal
-This package optimizes React.Context API, implementing `calculateChangedBits`, which works the same way
-`shouldComponentUpdate` or just `PureComponent` works - optimizes the way React react to updated
+This package optimizes React.Context API by implementing `calculateChangedBits`, which works the same way as
+`shouldComponentUpdate` or `PureComponent` - it optimizes the way React reacts to context updates.
 
 # The problem
-It is common to store something inside context Provider. Something like this
+It is common to store an object inside of the context `Provider`:
 ```js
 <Provider value={{key1: 1, key2: 2}} />
 ```
-That would produce a new `value` every time, causing all `Consumers` to update, and causing React to traverse all
-the tree, to find those Consumers.
-This package provides a way to handle the value change event, and suppress unnecessary updates.
+However, that produces a new `value` every time, causing all `Consumers` to update. React then needs to traverse
+the entire tree to find those `Consumer` components.
+This package provides a way to handle when the value changes, and suppress unnecessary updates.
 
 # API
 
 ## createPureContext(defaultValue)
-Creates "pure" context, the same "pure" as in "PureComponent". This is basically `React.createContext(xx, pureContextCompare)`
+Creates "pure" context, the same way that "PureComponent" is "pure." This is equivalent to `React.createContext(xx, pureContextCompare)`
 ```js
 👎 import {createContext} from 'react';
 const context = createContext();
@@ -45,7 +45,7 @@ const context = createPureContext();
 ```
 
 ## pureContextCompare
-shallow compares the old and the next context value. Supress update if the are the same.
+Shallow compares the old and next context value. It supresses the update if they are the same.
 ```js
 import {pureContextCompare} from 'react-shallow-context';
 const context = React.createContext({}, pureContextCompare);
@@ -55,15 +55,15 @@ const context = createPureContext({});
 ``` 
 
 ## updateIgnoring(keys)
-The same, but ignoring selected keys. Useful then context contain some `callback` function, which could be allways the different, 
-but play a role, only when anther value got changed. 
+The same as `pureContextCompare`, but it ignores selected keys. This is useful when the context contains some `callback` function that could always be different, 
+but only plays a role when another value is changed. 
 ```js
 import {updateIgnoring} from 'react-shallow-context';
 const context = React.createContext({importantValue, notImportantValue}, updateIgnoring(['notImportantValue']));
 ```
 
 ## updateOnlyFor(keys)
-The same, but with inversed logic. 
+The inverse of `updateIgnoring`.  Will only trigger an update when the given `keys` change.
 ```js
 import {updateOnlyFor} from 'react-shallow-context';
 const context = React.createContext({importantValue, notImportantValue}, updateOnlyFor(['importantValue']));
